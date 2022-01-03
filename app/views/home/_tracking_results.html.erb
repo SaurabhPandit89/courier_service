@@ -1,0 +1,27 @@
+<table class='generic' style='width:50%;'>
+  <thead>
+    <tr>
+      <th><center>Tracking Number</center></th>
+      <th><center>Parcel Detail</center></th>
+      <th><center>Current Status</center></th>
+      <th><center>Updated At</center></th>
+    </tr>
+  </thead>
+</table>
+<table style='width:50%;table-layout:fixed;'>
+  <tbody>
+    <tr colspan='4'><td><center><br/></center></td></tr>
+    <% if @parcel.present? %>
+      <% @parcel.each do |parcel| %>
+        <tr>
+          <td><center><%= link_to parcel.tracking_number, parcel_path(parcel) %></center></td>
+          <td><center><%= parcel.content %></center></td>
+          <td><center><%= parcel.parcel_statuses.latest.status %></center></td>
+          <td><center><%= format_time(parcel.parcel_statuses.latest.updated_at) %></center></td>
+        </tr>
+      <% end %>
+    <% else %>
+      <tbody><tr colspan='4'><td><center>No Data Found !!!</center></td></tr>
+    <% end %>
+  </tbody>
+</table>

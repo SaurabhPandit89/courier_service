@@ -1,0 +1,17 @@
+<tr>
+  <% ParcelStatus.status.each do |k, v| %>
+    <td>
+      <table style='width:100%;'>
+        <tbody>
+            <tr class='<%= v == current_status(@parcel) ? 'grey' : 'white' %>'>
+            <td>
+              <center>
+                <%= v == current_status(@parcel) ? v : update_parcel_status(k, v, @parcel) %>
+              </center>
+            </td>
+            </tr>
+        </tbody>
+      </table>
+    </td>
+  <% end %>
+</tr>

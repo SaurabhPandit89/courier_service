@@ -1,0 +1,9 @@
+<div class='errors' style='width:70%;'>
+  <% if @parcel.errors.present? %>
+    <ul>
+      <% @parcel.errors.full_messages.each do |msg| %>
+        <li><p style='color: red;'><%= msg %></p></li>
+      <% end %>
+    </ul>
+  <% end %>
+</div>

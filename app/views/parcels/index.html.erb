@@ -1,0 +1,39 @@
+<%= render 'notice' %>
+<div class='add_new_parcel' style='float:right;width:40%'>
+  <%= link_to 'Add New Parcel', new_parcel_path %> | <%= link_to 'Home', root_path %>
+</div>
+<br/><br/>
+<table class='generic' style='width:70%;'>
+  <thead>
+    <tr>
+      <th>Tracking Number</th>
+      <th>Parcel Detail</th>
+      <th>Sender Name</th>
+      <th>Receiver Name</th>
+      <th>Current Status</th>
+      <th>Updated At</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+</table>
+<table style='width:70%;table-layout:fixed;'>
+  <tbody>
+    <% @parcels.each do |parcel| %>
+      <tr class=<%= cycle('white', 'grey') %>>
+        <td><center><%= parcel.tracking_number %></center></td>
+        <td><center><%= parcel.content %></center></td>
+        <td><center><%= user_full_name(parcel, 'sender') %></center></td>
+        <td><center><%= user_full_name(parcel, 'receiver') %></center></td>
+        <td><center><%= parcel.parcel_statuses.latest.status %></center></td>
+        <td><center><%= format_time(parcel.parcel_statuses.latest.updated_at) %></center></td>
+        <td>
+          <center>
+            <%= link_to 'Edit', edit_parcel_path(parcel) %><br/> 
+            <%= link_to 'Show', parcel_path(parcel) %><br/>
+            <%= link_to 'Delete', parcel_path(parcel), method: :delete %>
+          </center>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

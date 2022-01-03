@@ -1,0 +1,4 @@
+<%= form_tag track_home_index_path, remote: true do %>
+  <%= search_field_tag 'track[tracking_number]', nil, placeholder: 'Enter Tracking Number' %>
+  <%= submit_tag 'Track' %>
+<% end %>

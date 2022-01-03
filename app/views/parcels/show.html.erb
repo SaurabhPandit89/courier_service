@@ -1,0 +1,113 @@
+<%= render 'notice' %>
+<div class='list_all_parcel' style='float:right;width:46%'>
+  <%= link_to 'List All Parcels', parcels_path %>
+</div>
+<br/><br/>
+<table style='width:60%;'>
+  <tbody>
+
+    <tr><th colspan='8' class='grey_head'>Parcel Details</th></tr>
+    <tr><td><center><br/></center></td></tr>
+    <tr>
+      <td colspan='2'>
+        <table style='width:100%;'>
+          <tr>
+            <th>Tracking Number : </th>
+            <td><%= @parcel.tracking_number %></td>
+          </tr>
+        </table>
+      </td>
+      <td colspan='2'>
+        <table style='width:100%;'>
+          <tr>
+            <th>Type : </th>
+            <td><%= @parcel.parcel_type.split('_').map(&:capitalize).join(' ') %></td>
+          </tr>
+        </table>
+      </td>
+      <td colspan='2'>
+        <table style='width:100%;'>
+          <tr>
+            <th>Weight : </th>
+            <td><%= @parcel.weight %></td>
+          </tr>
+        </table>
+      </td>
+      <td colspan='2'>
+        <table style='width:100%;'>
+          <tr>
+            <th>Content : </th>
+            <td><%= @parcel.content %></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr><td><center><br/></center></td></tr>
+
+    <tr>
+      <th colspan='4' class='grey_head'>Sender Details</th>
+      <th colspan='4' class='grey_head'>Receiver Details</th>
+    </tr>
+    <tr><td><center><br/></center></td></tr>
+    <tr>
+      <td colspan='4'>
+        <table style='width:100%;'>
+          <tbody>
+            <tr>
+              <th>Name : </th>
+              <td><%= user_full_name(@parcel, 'sender') %></td>
+            </tr>
+            <tr><td><center><br/></center></td></tr>
+            <tr>
+              <th>Address : </th>
+              <td><%= user_address(@parcel, 'sender') %></td>
+            </tr>
+          </tbody>
+        </table>
+      </td>
+      <td colspan='4'>
+        <table style='width:100%;'>
+          <tbody>
+            <tr>
+              <th>Name : </th>
+              <td><%= user_full_name(@parcel, 'receiver') %></td>
+            </tr>
+            <tr><td><center><br/></center></td></tr>
+            <tr>
+              <th>Address : </th>
+              <td><%= user_address(@parcel, 'receiver') %></td>
+            </tr>
+          </tbody>
+        </table>
+      </td>
+    </tr>
+    <tr><td><center><br/></center></td></tr>
+
+    <tr><th colspan='8' class='grey_head'>Payment Details</th></tr>
+    <tr><td><center><br/></center></td></tr>
+    <tr>
+      <td colspan='4'>
+        <table style='width:100%;'>
+          <tbody><tr>
+            <th>Payment Mode : </th>
+            <td><%= @parcel.payment_detail.payment_mode.capitalize %></td>
+          </tr></tbody>
+        </table>
+      </td>
+      <td colspan='4'>
+        <table style='width:100%;'>
+          <tbody><tr>
+            <th>Service Mode : </th>
+            <td><%= @parcel.payment_detail.service_mode.split('_').map(&:capitalize).join(' ') %></td>
+          </tr></tbody>
+        </table>
+      </td>
+    </tr>
+    <tr><td><center><br/></center></td></tr>
+
+    <tr><th colspan='8' class='grey_head'>Parcel Status</th></tr>
+    <tr><td><center><br/></center></td></tr>
+    <div class='parcel_status'><%= render 'parcel_status/parcel_status' %></div>
+    <tr><td><center><br/></center></td></tr>
+  </tbody>
+</table>

@@ -1,0 +1,14 @@
+<%= link_to 'List all Parcels', parcels_path %> | <%= link_to 'Add New Parcel', new_parcel_path %>
+<br/><br/>
+<%= render 'parcels/notice' %>
+<table style='width:30%;border:1px solid black;'>
+  <tbody>
+    <tr><td><center><h3>Track your Parcel</h3></center></td></tr>
+    <tr><td><center><%= render 'track_form' %></center></td></tr>
+    <tr><td><center><br/></center></td></tr>
+  </tbody>
+</table>
+
+<br/><br/>
+
+<div class='tracking_result'> </div>

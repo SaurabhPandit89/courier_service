@@ -1,0 +1,95 @@
+<%= render 'notice' %>
+<%= render 'error' %>
+<%= form_for @parcel do |parcel_form| %>
+  <table style='width:70%;'> 
+    <tr>
+      <th colspan='3' class='grey_head'>Parcel Details</th>
+    </tr>
+    <tr><td><center><br/></center></td></tr>
+    <tr>
+      <td>
+        <table style='width:100%'>
+          <tr><td style='width:39%;font-weight:bold;'><%= parcel_form.label :parcel_type, 'Type : ' %></td><td><%= parcel_form.select :parcel_type, parcel_type_options, include_blank: true %></td></tr>
+        </table>
+      </td>
+      <td>
+        <table style='width:100%'>
+          <tr><td style='width:35%;font-weight:bold;'><%= parcel_form.label :weight, 'Weight : ' %></td><td><%= parcel_form.text_field :weight %></td></tr>
+        </table>
+      </td>
+      <td>
+        <table style='width:100%'>
+          <tr><td style='width:35%'><%= parcel_form.label :content, 'Content : ' %></td><td><%= parcel_form.text_field :content  %></td></tr>
+        </table>
+      </td>
+      <%= parcel_form.hidden_field :is_delivered, value: false  %>
+    </tr>
+    <tr><td><center><br/></center></td></tr>
+    <%= parcel_form.fields_for :users do |user_form| %>
+      <% form_name = cycle('Sender', 'Receiver') %>
+      <tr>
+        <th colspan='3' class='grey_head'><%= "#{form_name} Details" %></th>
+      </tr>
+      <tr><td><center><br/></center></td></tr>
+      <tr>
+        <%= render 'parcels/user/form', user_form: user_form, user_type: form_name %>
+
+        <% if user_form.object.address %>
+          <%= user_form.fields_for :address do |address_form| %>
+            <%= render 'parcels/user/address', address_form: address_form %>
+          <% end %>
+        <% else %>
+          <%= fields_for "parcel[users_attributes][#{user_form.options[:child_index]}][address_attributes]" do |address_form| %>
+            <%= render 'parcels/user/address', address_form: address_form %>
+          <% end %>
+        <% end %>
+
+        <% if user_form.object.contact_detail %>
+          <%= user_form.fields_for :contact_detail do |contact_detail_form| %>
+            <%= render 'parcels/user/contact_detail', contact_detail_form: contact_detail_form %>
+          <% end %>
+        <% else %>
+          <%= fields_for "parcel[users_attributes][#{user_form.options[:child_index]}][contact_detail_attributes]" do |contact_detail_form| %>
+            <%= render 'parcels/user/contact_detail', contact_detail_form: contact_detail_form %>
+          <% end %>
+        <% end %>
+      </tr>
+      <tr><td><center><br/></center></td></tr>
+    <% end %>
+    <tr>
+      <th colspan='3' class='grey_head'>Payment Details</th>
+    </tr>
+    <tr><td><center><br/></center></td></tr>
+    <tr>
+      <% if parcel_form.object.payment_detail %>
+        <%= parcel_form.fields_for :payment_detail do |payment_detail_form| %>
+          <td>
+            <table style='width:100%'>
+              <tr><td style='width:40%;font-weight:bold;'><%= payment_detail_form.label :payment_mode, 'Payment Mode : ' %></td><td><%= payment_detail_form.select :payment_mode, payment_mode_options, include_blank: true %></td></tr>
+            </table>
+          </td>
+          <td>
+            <table style='width:100%'>
+              <tr><td style='width:35%;font-weight:bold;'><%= payment_detail_form.label :service_mode, 'Service Mode : ' %></td><td><%= payment_detail_form.select :service_mode, service_mode_options, include_blank: true %></td></tr>
+            </table>
+          </td>
+        <% end %>
+      <% else %>
+        <%= fields_for 'parcel[payment_detail_attributes]' do |payment_detail_form| %>
+          <td>
+            <table style='width:100%'>
+              <tr><td style='width:39%;font-weight:bold;'><%= payment_detail_form.label :payment_mode, 'Payment Mode : ' %></td><td><%= payment_detail_form.select :payment_mode, payment_mode_options, include_blank: true %></td></tr>
+            </table>
+          </td>
+          <td>
+            <table style='width:100%'>
+              <tr><td style='width:35%;font-weight:bold;'><%= payment_detail_form.label :service_mode, 'Service Mode : ' %></td><td><%= payment_detail_form.select :service_mode, service_mode_options, include_blank: true %></td></tr>
+            </table>
+          </td>
+        <% end %>
+      <% end %>
+    </tr>
+    <tr><td><center><br/></center></td></tr>
+    <tr><td colspan='3'><center><%= parcel_form.submit 'Save' %>  <button type='cancel' name='cancel' value='true'>Cancel</button></center></td></tr>
+  </table>
+<% end %>

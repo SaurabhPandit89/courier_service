@@ -1,0 +1,35 @@
+<td>
+  <table style='width:100%'>
+    <tr>
+      <td style='font-weight:bold;'><%= user_form.label :first_name, 'First Name : ' %></td>
+      <td><%= user_form.text_field :first_name %></td>
+    </tr>
+    <tr>
+      <td><%= user_form.label :middle_name, 'Middle Name : ' %></td>
+      <td><%= user_form.text_field :middle_name %></td>
+    </tr>
+    <tr>
+      <td style='font-weight:bold;'><%= user_form.label :last_name, 'Last Name : ' %></td>
+      <td><%= user_form.text_field :last_name %></td>
+    </tr>
+    <tr>
+      <td style='font-weight:bold;'><%= user_form.label :gender, 'Gender : ' %></td>
+      <td><%= user_form.select :gender, gender_options, include_blank: true %></td>
+    </tr>
+    <tr>
+      <td style='font-weight:bold;'><%= user_form.label :id_proof_type, 'ID Proof Type : ' %></td>
+      <td><%= user_form.text_field :id_proof_type %></td>
+    </tr>
+    <tr>
+      <td style='font-weight:bold;'><%= user_form.label :id_proof_number, 'ID Proof Number : ' %></td>
+      <td><%= user_form.text_field :id_proof_number %></td>
+    </tr>
+    <tr>
+      <td style='font-weight:bold;'><%= user_form.label :email, 'Email : ' %></td>
+      <td><%= user_form.email_field :email %></td>
+    </tr>
+    <tr>
+      <td><%= user_form.hidden_field :user_type, value: user_type %></td>
+    </tr>
+  </table>
+</td>
