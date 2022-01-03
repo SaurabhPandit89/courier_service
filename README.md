@@ -1,24 +1,9 @@
-# README
+# Courier Service
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+* Ruby version : 3.0.0
 
-Things you may want to cover:
+* Rails version : 6.1.4
 
-* Ruby version
+* Database creation : rails db:create
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* Database initialization : rails db:migrate
